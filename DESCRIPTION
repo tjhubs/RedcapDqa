@@ -1,0 +1,17 @@
+Package: RedcapDqa
+Type: Package
+Title: Data Quality Assurance
+Version: 1.0
+Date: 2015-02-18
+Author@R: c(person("Boniface", "Makone", email = "bonifacemakone@gmail.com",
+    role = c("aut", "cre"), comment = "Statistician"), person("Lucas", "Malla", email = "lucasmatking@gmail.com",
+    role = c("aut", "ctb", "com"), comment = "Initial code compiler"))
+Maintainer: Boniface Makone <bonifacemakone@gmail.com>
+Description: Data Quality Assurance of Redcap Repositories
+Url: https://github.com/bonmac/RedcapDqa
+Depends:
+    RedcapData,
+    stringr
+Imports:
+    RedcapData
+License: GPL >= 2
