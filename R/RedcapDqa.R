@@ -31,7 +31,6 @@ RedcapDqa = setClass(
     strata = NA_character_
     ),
   validity = function(object) {
-    browser()
     if (!all(dim(object@dqaData) == dim(object@repoData)))
       return("dimensions of dqa and repo data differ")
     if (!all(colnames(object@dqaData) %in% colnames(object@repoData)))
