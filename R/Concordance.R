@@ -36,7 +36,6 @@ setGeneric("audit", function(obj, ...) standardGeneric("audit"))
 #'These datasets are used to create an instance of a \code{RedcapDqa} object.
 
 setMethod(f = "audit", signature(obj = "RedcapDqa"), function(obj, ...) {
-  browser()
   if (("stratified" %in% names(list(...))))
     stratified = unlist(list(...)["stratified"])
   else 

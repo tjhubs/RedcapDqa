@@ -3,7 +3,6 @@
 S3method(summary,RedcapDqaResult)
 S3method(summary,RedcapDqaResults)
 export(audit)
-export(document.RedcapDqaResults)
 export(print.RedcapDqaResult)
 export(print.RedcapDqaResults)
 export(redcap_dqa)
