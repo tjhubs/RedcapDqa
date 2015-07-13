@@ -18,20 +18,30 @@ RedcapDqa = setClass(
   "RedcapDqa",
   slots = c(
     identifiers = "integer",
+    metaData = "data.frame",
     dqaData = "data.frame",
-    repoData = "data.frame"
+    repoData = "data.frame",
+    strata = "character"
     ),
   prototype = prototype(
+    identifiers = integer(),
+    metaData = data.frame(),
     dqaData = data.frame(),
-    repoData = data.frame()
+    repoData = data.frame(),
+    strata = NA_character_
     ),
   validity = function(object) {
+    browser()
     if (!all(dim(object@dqaData) == dim(object@repoData)))
       return("dimensions of dqa and repo data differ")
     if (!all(colnames(object@dqaData) %in% colnames(object@repoData)))
       return("columns of dqa and repo data do not match")
     if (length(object@identifiers) != nrow(object@repoData))
       return("no of identifiers must match dataset row count")
+    if (!is.na(object@strata) && !all(object@strata %in% names(object@dqaData)))
+      return("strata variable not in DQA dataset")
+    if (!is.na(object@strata) && !all(object@strata %in% names(object@repoData)))
+      return("strata variable not in repo dataset")
     TRUE
   })
 
@@ -53,6 +63,8 @@ setMethod(f = "print", signature(x = "RedcapDqa"), function(x, ...) {
   . = "Redcap Data Quality Assurance"
   tmp = dim(x@dqaData)
   . = c(., paste0("Data: ", tmp[1], " rows & ", tmp[2], " columns"))
+  if (!is.na(x@strata))
+    . = c(., paste0("Stratification: ", paste0(x@strata, collapse = ', ')))
   . = paste0(., collapse = "\n")
   . = paste0(., "\n")
   cat(.)
