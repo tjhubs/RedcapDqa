@@ -38,7 +38,7 @@ setGeneric("audit", function(obj, ...) standardGeneric("audit"))
 setMethod(f = "audit", signature(obj = "RedcapDqa"), function(obj, ...) {
   if (("stratified" %in% names(list(...))))
     stratified = unlist(list(...)["stratified"])
-  else 
+  else
     stratified = FALSE
   if (is.logical(stratified) && stratified)
     stratified = TRUE
@@ -55,13 +55,13 @@ setMethod(f = "audit", signature(obj = "RedcapDqa"), function(obj, ...) {
     .D <- c(list(Overall = .D), split(.D, as.data.frame(.D)[, obj@strata]))
     .D <- lapply(.D, function(x) {
       if (isTRUE(obj@strata %in% colnames(x)))
-        x[, -which(obj@strata %in% colnames(x))]
+        x <- x[, -which(colnames(x) %in% obj@strata)]
       x
     })
     .R <- c(list(Overall = .R), split(.R, as.data.frame(.R)[, obj@strata]))
     .R <- lapply(.R, function(x) {
       if (isTRUE(obj@strata %in% colnames(x)))
-        x[, -which(obj@strata %in% colnames(x))]
+        x <- x[, -which(colnames(x) %in% obj@strata)]
       x
     })
   } else {

@@ -5,10 +5,10 @@
 \title{Instantiate DQA object}
 \usage{
 redcap_dqa(repo_file_location = NA, dqa_file_location = NA,
-  repo_token = NA, dqa_token = NA,
+  meta_file_location = NA, repo_token = NA, dqa_token = NA,
   repo_api_url = "http://localhost/redcap/api/", dqa_api_url = repo_api_url,
   local = T, dqa_local = local, repo_local = local,
-  fields_to_exclude = NA, min_date = NA, max_date = NA,
+  fields_to_exclude = NA, id_var = NA, min_date = NA, max_date = NA,
   date_var = "date_today", strata = NA)
 }
 \arguments{
@@ -31,6 +31,8 @@ redcap_dqa(repo_file_location = NA, dqa_file_location = NA,
 \item{repo_local}{Flag as to whether the data repo is local to the R instance.}
 
 \item{fields_to_exclude}{Fields to be excluded from the audit process. For example, timestamps.}
+
+\item{id_var}{Field to be used to identify records across the two repositories.}
 
 \item{min_date}{Minimum date used to constrain data.}
 

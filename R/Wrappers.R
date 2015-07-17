@@ -15,6 +15,7 @@
 #'@param repo_local Flag as to whether the data repo is local to the R instance.
 #'@param dqa_local Flag as to whether the dqa repo is local to the R instance.
 #'@param fields_to_exclude Fields to be excluded from the audit process. For example, timestamps.
+#'@param id_var Field to be used to identify records across the two repositories.
 #'@param min_date Minimum date used to constrain data.
 #'@param max_date Maximum date used to constrain data.
 #'@seealso \code{\link{RedcapDqa}}
@@ -33,6 +34,7 @@
 redcap_dqa = function(
   repo_file_location = NA,
   dqa_file_location = NA,
+  meta_file_location = NA,
   repo_token = NA,
   dqa_token = NA,
   repo_api_url = "http://localhost/redcap/api/",
@@ -41,6 +43,7 @@ redcap_dqa = function(
   dqa_local = local,
   repo_local = local,
   fields_to_exclude = NA,
+  id_var = NA,
   min_date = NA,
   max_date = NA,
   date_var = 'date_today',
@@ -60,31 +63,72 @@ redcap_dqa = function(
     warning('only one maximum date needed. taking the first value')
     max_date = max_date[1]
   }
+  if (1 < length(id_var)) {
+    warning('only one identifier variable needed. taking the first value')
+    id_var = id_var[1]
+  }
+  min_date = as.Date(min_date); max_date = as.Date(max_date)
+  if (!is.na(min_date) && !is.na(max_date) && 
+      min_date > max_date) 
+    stop('minimum date greater than maximum date')
   if (all(sapply(strata, is.na)))
     strata = NA
   suppressMessages({
-    meta_data = get_redcap_data(api = repo_api_url, 
-                                token = repo_token, 
-                                content = "metadata", 
-                                local = repo_local,
-    )
-    min_date = as.Date(min_date); max_date = as.Date(max_date)
-    if (!is.na(min_date) && !is.na(max_date) && 
-          min_date > max_date) 
-      stop('minimum date greater than maximum date')
-    id_var = meta_data[1, 1]
-    dqa_ids = as.integer(unlist(
-      get_redcap_data(api = dqa_api_url, 
-                      token = dqa_token,
-                      local = dqa_local,
-                      fields = id_var
-      )))
-    repo_ids = as.integer(unlist(
-      get_redcap_data(api = repo_api_url, 
-                      token = repo_token,
-                      local = repo_local,
-                      fields = id_var
-      )))
+    if (!is.na(meta_file_location)) {
+      if (!file.exists(meta_file_location))
+        stop("metadata file location not found")
+      if (!grepl(".csv$", as.character(meta_file_location)))
+        stop("metadata must be a csv")
+      meta_data = read.csv(meta_file_location, stringsAsFactors = F)
+    } else {
+      meta_data = get_redcap_data(api = repo_api_url, 
+                                  token = repo_token, 
+                                  content = "metadata", 
+                                  local = repo_local
+      )
+    }
+    if (!is.na(id_var)) {
+      if (!grepl(id_var, meta_data[, 1]))
+        stop("identifier variable not in metadata")
+    } else {
+      id_var = meta_data[1, 1]
+    }
+    record_id = meta_data[1, 1]
+    if (isTRUE(str_trim(id_var) == str_trim(record_id))) {
+      dqa_ids = as.integer(unlist(
+        get_redcap_data(api = dqa_api_url, 
+                        token = dqa_token,
+                        local = dqa_local,
+                        fields = id_var
+                        )))
+        repo_ids = as.integer(unlist(
+          get_redcap_data(api = repo_api_url, 
+                          token = repo_token,
+                          local = repo_local,
+                          fields = id_var
+                          )))
+    } else {
+      browser()
+      tmp = paste(id_var, record_id, sep = ",")
+      dqa_ids = as.matrix(
+        get_redcap_data(api = dqa_api_url, 
+                        token = dqa_token,
+                        local = dqa_local,
+                        fields = tmp
+        ))
+      repo_ids = as.matrix(
+        get_redcap_data(api = repo_api_url, 
+                        token = repo_token,
+                        local = repo_local,
+                        fields = tmp
+        ))
+      tmp = unique(intersect(dqa_ids[, 1], repo_ids[, 1]))
+      dqa_ids = dqa_ids[, 2][order(which(dqa_ids[, 1] %in% tmp))]
+      repo_ids = repo_ids[, 2][order(which(repo_ids[, 1] %in% tmp))]
+      if (length(dqa_ids) != length(repo_ids))
+        stop("There are duplicates in idenfifier variable")
+      
+    }
     ids_dqa = intersect(dqa_ids, repo_ids)
     dqa_data = get_redcap_data(api = dqa_api_url, 
                                token = dqa_token,
