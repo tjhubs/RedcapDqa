@@ -7,6 +7,7 @@ Author@R: c(person("Boniface", "Makone", email = "bonifacemakone@gmail.com",
     role = c("aut", "cre"), comment = "Statistician"), person("Lucas", "Malla",
     email = "lucasmatking@gmail.com", role = c("aut", "ctb", "com"), comment =
     "Initial code compilation"))
+Author: Boniface Makone [aut, cre], Lucas Malla [aut, ctb, com]
 Maintainer: Boniface Makone <bonifacemakone@gmail.com>
 Description: Data Quality Assurance of Redcap Repositories
 Url: https://github.com/bonmac/RedcapDqa
@@ -16,3 +17,10 @@ Depends:
 Imports:
     RedcapData
 License: GPL >= 2
+Collate:
+    'RedcapDqaPackage.R'
+    'RedcapDqa.R'
+    'Concordance.R'
+    'Helper.R'
+    'Wrappers.R'
+RoxygenNote: 5.0.1

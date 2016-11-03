@@ -28,7 +28,9 @@ Boniface Makone
 Maintainer: Boniface Makone <bonifacemakone@gmail.com>
 }
 
-\code{\link[Github]{https://github.com/bonmac/RedcapDqa}}
+\section{Github Repository}{
+  \code{\link[Github]{https://github.com/bonmac/RedcapDqa}}
+}
 
 \examples{
 library(RedcapDqa)
