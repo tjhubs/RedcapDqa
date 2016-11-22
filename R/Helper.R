@@ -163,7 +163,7 @@ get_audit_ids <- function(env) {
     
     if (!data_missing(site_id) && strata %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
-      dqa_ids <- dqa_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
+      dqa_ids <- dqa_ids[str_trim(dqa_ids[, strata]) %in% str_trim(site_id), ]
       strata <- NA
     }
     dqa_ids[, record_id] <- str_trim(dqa_ids[, record_id])
