@@ -152,16 +152,16 @@ get_audit_ids <- function(env) {
                       local = repo_local,
                       fields = tmp
       ))
-    if (!data_missing(min_date) && date_var %in% names(repo_ids)) {
+    if (!data_missing(min_date) && date_var %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[sapply(dqa_ids[, date_var], is_date), ]
       repo_ids <- repo_ids[as.Date(dqa_ids[, date_var]) >= min_date, ]
     }
-    if (!data_missing(max_date) && date_var %in% names(repo_ids)) {
+    if (!data_missing(max_date) && date_var %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[sapply(dqa_ids[, date_var], is_date), ]
       repo_ids <- repo_ids[as.Date(dqa_ids[, date_var]) <= max_date, ]
     }
     
-    if (!data_missing(site_id) && strata %in% names(repo_ids)) {
+    if (!data_missing(site_id) && strata %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
       dqa_ids <- dqa_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
       strata <- NA
