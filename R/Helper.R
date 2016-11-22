@@ -169,8 +169,10 @@ get_audit_ids <- function(env) {
     dqa_ids[, record_id] <- str_trim(dqa_ids[, record_id])
     repo_ids[, record_id] <- str_trim(repo_ids[, record_id])
     tmp = unique(intersect(dqa_ids[, record_id], repo_ids[, record_id]))
-    dqa_ids = dqa_ids[, record_id][order(which(dqa_ids[, record_id] %in% tmp))]
-    repo_ids = repo_ids[,record_id][order(which(repo_ids[, record_id] %in% tmp))]
+    if (0 == length(tmp))
+      stop("No matching records found!")
+    dqa_ids = dqa_ids[, record_id][which(dqa_ids[, record_id] %in% tmp)]
+    repo_ids = repo_ids[,record_id][which(repo_ids[, record_id] %in% tmp)]
     if (length(dqa_ids) != length(repo_ids))
       stop("There are duplicates in identifier variable")
     ids_dqa = as.integer(na.omit(intersect(dqa_ids, repo_ids)))
