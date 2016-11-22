@@ -138,7 +138,7 @@ get_audit_ids <- function(env) {
     if (isTRUE(!data_missing(min_date)) || isTRUE(!data_missing(max_date))) 
       tmp <- c(tmp, date_var)
     if (isTRUE(!data_missing(site_id)))
-      tmp <- c(tmp, site_id)
+      tmp <- c(tmp, strata)
     tmp <- paste0(tmp, collapse=",")
     dqa_ids = as.matrix(
       get_redcap_data(api = dqa_api_url, 
