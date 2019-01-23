@@ -40,7 +40,4 @@ These datasets are used to create an instance of a \code{RedcapDqa} object.
 \seealso{
 \code{\link{RedcapDqa}}
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

@@ -24,7 +24,4 @@ This also separates the concerns of the main wrapper function in addition to mak
 \seealso{
 \code{\link{redcap_dqa}}
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

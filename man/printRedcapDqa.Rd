@@ -16,7 +16,4 @@ Print DQA object
 \details{
 Generic Print method
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

@@ -153,13 +153,14 @@ get_audit_ids <- function(env) {
                       fields = tmp
       ))
     if (!data_missing(min_date) && date_var %in% colnames(repo_ids)) {
-      repo_ids <- repo_ids[sapply(dqa_ids[, date_var], is_date), ]
-      repo_ids <- repo_ids[as.Date(dqa_ids[, date_var]) >= min_date, ]
+      dqa_ids <- dqa_ids[sapply(dqa_ids[, date_var], is_date), ]
+      dqa_ids <- dqa_ids[as.Date(dqa_ids[, date_var]) >= min_date, ]
     }
     if (!data_missing(max_date) && date_var %in% colnames(repo_ids)) {
-      repo_ids <- repo_ids[sapply(dqa_ids[, date_var], is_date), ]
-      repo_ids <- repo_ids[as.Date(dqa_ids[, date_var]) <= max_date, ]
+      dqa_ids <- dqa_ids[sapply(dqa_ids[, date_var], is_date), ]
+      dqa_ids <- dqa_ids[as.Date(dqa_ids[, date_var]) <= max_date, ]
     }
+    repo_ids <- repo_ids[repo_ids[,record_id] %in% dqa_ids[,record_id], ]
     
     if (!data_missing(site_id) && strata %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
@@ -241,8 +242,8 @@ wrangle_audit_data <- function(env) {
     fields_to_exclude <- do.call(c, lapply(fields_to_exclude, function(x) grep(x, names(repo_data), v = T)))
     cols_dqa = cols_dqa[!cols_dqa %in% fields_to_exclude]
   }
-  if (is.element(id_var, cols_dqa))
-    cols_dqa = cols_dqa[-grep(paste0("^", id_var, "$"), cols_dqa)]
+  #if (is.element(id_var, cols_dqa))
+  #  cols_dqa = cols_dqa[-grep(paste0("^", id_var, "$"), cols_dqa)]
   dqa_data = dqa_data[, cols_dqa]
   repo_data = repo_data[, cols_dqa]
   if (0 == nrow(dqa_data))

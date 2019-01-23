@@ -12,7 +12,4 @@ print DQA Results
 \details{
 Generic print method
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

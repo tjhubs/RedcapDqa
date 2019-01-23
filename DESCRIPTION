@@ -1,16 +1,19 @@
 Package: RedcapDqa
 Type: Package
 Title: Data Quality Assurance
-Version: 1.0
-Date: 2015-02-18
+Version: 1.2
+Date: 2019-01-23
 Author@R: c(person("Boniface", "Makone", email = "bonifacemakone@gmail.com",
     role = c("aut", "cre"), comment = "Statistician"), person("Lucas", "Malla",
     email = "lucasmatking@gmail.com", role = c("aut", "ctb", "com"), comment =
-    "Initial code compilation"))
-Author: Boniface Makone [aut, cre], Lucas Malla [aut, ctb, com]
-Maintainer: Boniface Makone <bonifacemakone@gmail.com>
+    "Initial code compilation"),
+    person("Abraham", "Lagat",email = "abraham.lagat.k@gmail.com", role = c("aut", "ed"), comment =
+    "Update newer versions")
+    )
+Author: Boniface Makone [aut, cre], Lucas Malla [aut, ctb, com], Abraham Lagat[aut]
+Maintainer: Abraham Lagat <abraham.lagat.k@gmail.com>
 Description: Data Quality Assurance of Redcap Repositories
-Url: https://github.com/bonmac/RedcapDqa
+Url: https://github.com/lagvier/RedcapDqa
 Depends:
     RedcapData,
     stringr
@@ -23,4 +26,4 @@ Collate:
     'Concordance.R'
     'Helper.R'
     'Wrappers.R'
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0

@@ -6,11 +6,11 @@
 \usage{
 redcap_dqa(repo_file_location = NA, dqa_file_location = NA,
   meta_file_location = NA, repo_token = NA, dqa_token = NA,
-  repo_api_url = "http://localhost/redcap/api/", dqa_api_url = repo_api_url,
-  local = T, dqa_local = local, repo_local = local,
-  fields_to_include = NA, fields_to_exclude = NA, id_var = NA,
-  min_date = NA, max_date = NA, date_var = "date_today", strata = NA,
-  site_id = NA)
+  repo_api_url = "http://localhost/redcap/api/",
+  dqa_api_url = repo_api_url, local = T, dqa_local = local,
+  repo_local = local, fields_to_include = NA, fields_to_exclude = NA,
+  id_var = NA, min_date = NA, max_date = NA,
+  date_var = "date_today", strata = NA, site_id = NA)
 }
 \arguments{
 \item{repo_file_location}{Repository data file location. If specified, data is not pulled from the repository.}
@@ -61,7 +61,4 @@ This results to an instance of a \code{RedcapDqa} object.
 \seealso{
 \code{\link{RedcapDqa}}
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

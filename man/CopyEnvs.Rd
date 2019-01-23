@@ -23,7 +23,4 @@ This helps in transfer of data as functions may be nested inside each other but 
 
 This is not in line with FP due to side effects and mutations that can arise but we have implemented this for computational convinience and separation of concerns
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}
