@@ -12,7 +12,4 @@ show DQA Results
 \details{
 Generic show method
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

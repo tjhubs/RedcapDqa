@@ -13,7 +13,4 @@ Show DQA object
 \details{
 Generic show method
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}

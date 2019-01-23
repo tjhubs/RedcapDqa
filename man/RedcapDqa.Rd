@@ -21,7 +21,5 @@ It stores these allied objects in its own cache and has a log to track events th
 
 \item{\code{cache}}{Temporary storage}
 }}
-\concept{
-RedcapDqa
-}
 
+\concept{RedcapDqa}

@@ -12,7 +12,4 @@ Summarize DQA Results
 \details{
 Generic summary method
 }
-\concept{
-RedcapDqa
-}
-
+\concept{RedcapDqa}
