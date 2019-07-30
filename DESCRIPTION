@@ -8,10 +8,12 @@ Author@R: c(person("Boniface", "Makone", email = "bonifacemakone@gmail.com",
     email = "lucasmatking@gmail.com", role = c("aut", "ctb", "com"), comment =
     "Initial code compilation"),
     person("Abraham", "Lagat",email = "abraham.lagat.k@gmail.com", role = c("aut", "ed"), comment =
+    "Update newer versions"),
+    person("Basil", "Owiti",email = "okolabasilowiti@gmail.com", role = c("aut", "ed"), comment =
     "Update newer versions")
     )
 Author: Boniface Makone [aut, cre], Lucas Malla [aut, ctb, com], Abraham Lagat[aut]
-Maintainer: Abraham Lagat <abraham.lagat.k@gmail.com>
+Maintainer: Basil Owiti <okolabasilowiti@gmail.com>
 Description: Data Quality Assurance of Redcap Repositories
 Url: https://github.com/lagvier/RedcapDqa
 Depends:
