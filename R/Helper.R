@@ -160,7 +160,8 @@ get_audit_ids <- function(env) {
       dqa_ids <- dqa_ids[sapply(dqa_ids[, date_var], is_date), ]
       dqa_ids <- dqa_ids[as.Date(dqa_ids[, date_var]) <= max_date, ]
     }
-    repo_ids <- repo_ids[repo_ids[,record_id] %in% dqa_ids[,record_id], ]
+    repo_ids <- repo_ids[str_trim(repo_ids[,record_id]) %in% 
+                           str_trim(dqa_ids[,record_id]), ]
     
     if (!data_missing(site_id) && strata %in% colnames(repo_ids)) {
       repo_ids <- repo_ids[str_trim(repo_ids[, strata]) %in% str_trim(site_id), ]
